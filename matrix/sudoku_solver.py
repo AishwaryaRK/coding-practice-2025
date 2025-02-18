@@ -12,11 +12,11 @@ class UnitGrid:
 
 
 class Solution:
-    def __is_valid_num(self, n: int, r, c, unit_grid: UnitGrid, board) -> bool:
-        return True
-
-    def __get_unit_grid(self, r, c):
-        return
+    # def __is_valid_num(self, n: int, r, c, unit_grid: UnitGrid, board) -> bool:
+    #     return True
+    #
+    # def __get_unit_grid(self, r, c):
+    #     return
 
     def __is_sudoku_solved(self, board) -> bool:
         for r in range(len(board)):
@@ -30,8 +30,8 @@ class Solution:
         """
 
         def backtrack(board) -> (bool, List[List[str]]):
-            if self.__is_sudoku_solved(board):
-                return (True, board)
+            # if self.__is_sudoku_solved(board):
+            #     return (True, board)
             for r in range(len(board)):
                 for c in range(len(board)):
                     if board[r][c] == ".":
@@ -47,7 +47,8 @@ class Solution:
                                 if is_complete:
                                     return (True, complete_board)
                         return (False, None)
-            return (False, None)
+            # return (False, None)
+            return (True,board)
 
         (_, board) = backtrack(board)
         print(board)

@@ -4,8 +4,8 @@ from typing import List
 
 class DocumentSearchEngine:
     def __init__(self):
-        self.inverted_index = defaultdict(lambda: defaultdict(list))
-        self.inverted_index_doc_ids = defaultdict(set)
+        self.inverted_index_with_token_positions = defaultdict(lambda: defaultdict(list))
+        self.inverted_index = defaultdict(set)
         self.documents = defaultdict(list)
 
     def __get_tokens(self, text: str) -> List[str]:
@@ -14,15 +14,15 @@ class DocumentSearchEngine:
 
     def __update_inverted_index(self, doc_id: int, tokens: List[str]):
         for i, token in enumerate(tokens):
-            self.inverted_index[token][doc_id].append(i)
-            self.inverted_index_doc_ids[token].add(doc_id)
+            self.inverted_index_with_token_positions[token][doc_id].append(i)
+            self.inverted_index[token].add(doc_id)
 
     def __is_phrase_in_doc(self, search_tokens: List[str], doc_id: int) -> bool:
         if len(search_tokens) == 1:
             return True
 
         first_token = search_tokens[0]
-        start_indices = self.inverted_index[first_token][doc_id]
+        start_indices = self.inverted_index_with_token_positions[first_token][doc_id]
         for start_index in start_indices:
             for i, token in enumerate(search_tokens[1:]):
                 index = start_index + i + 1
@@ -42,7 +42,7 @@ class DocumentSearchEngine:
         search_tokens = self.__get_tokens(phrase)
         doc_ids_per_token = []
         for token in search_tokens:
-            doc_ids_per_token.append(self.inverted_index_doc_ids[token])
+            doc_ids_per_token.append(self.inverted_index[token])
         doc_ids_intersection = set.intersection(*doc_ids_per_token)
         result = []
         for doc_id in doc_ids_intersection:

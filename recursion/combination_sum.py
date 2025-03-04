@@ -1,7 +1,8 @@
 from typing import List
 
 
-def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+# def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+def combinationSum(candidates, target):
     def decision_tree(candidates, target):
         if not candidates:
             return []
@@ -19,7 +20,7 @@ def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
             return [[n]]
 
         result = []
-        combinations1 = decision_tree(candidates, target - n)
+        combinations1 = decision_tree(candidates, round(target - n, 2))
         combinations2 = decision_tree(candidates[1:], target)
         for c in combinations1:
             if c:
@@ -32,9 +33,10 @@ def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
     return decision_tree(candidates, target)
 
 
-print(combinationSum([2, 3, 6, 7], 7))
-print(combinationSum([2, 3, 5], 8))
-print(combinationSum([2], 1))
-print(combinationSum([3, 5, 8], 11))
-print(combinationSum([8,7,4,3], 11))
-print(combinationSum([2,4,8], 8))
+# print(combinationSum([2, 3, 6, 7], 7))
+# print(combinationSum([2, 3, 5], 8))
+# print(combinationSum([2], 1))
+# print(combinationSum([3, 5, 8], 11))
+# print(combinationSum([8,7,4,3], 11))
+# print(combinationSum([2,4,8], 8))
+print(combinationSum([2.15, 2.75, 3.35, 3.55, 4.20, 5.80], 15.05))

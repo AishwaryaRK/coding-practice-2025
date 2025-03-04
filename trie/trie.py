@@ -35,7 +35,7 @@ class Trie:
         return True
 
     def all_words_with_prefix(self, prefix: str) -> List[str]:
-        def traverse(t):
+        def traverse(t)->List[str]:
             words = []
             for w, next_t in t.items():
                 if w == None:

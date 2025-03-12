@@ -15,18 +15,13 @@ def numIslands(grid: List[List[str]]) -> int:
                 while queue:
                     i, j = queue.popleft()
                     visited.add((i, j))
-                    if i - 1 >= 0 and grid[i - 1][j] == "1" and (i - 1, j) not in visited:
-                        queue.append((i - 1, j))
-                        visited.add((i - 1, j))
-                    if i + 1 < len(grid) and grid[i + 1][j] == "1" and (i + 1, j) not in visited:
-                        queue.append((i + 1, j))
-                        visited.add((i + 1, j))
-                    if j - 1 >= 0 and grid[i][j - 1] == "1" and (i, j - 1) not in visited:
-                        queue.append((i, j - 1))
-                        visited.add((i, j - 1))
-                    if j + 1 < len(grid[0]) and grid[i][j + 1] == "1" and (i, j + 1) not in visited:
-                        queue.append((i, j + 1))
-                        visited.add((i, j + 1))
+                    neighbors = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
+                    for neighbor in neighbors:
+                        if neighbor[0] in range(len(grid)) and neighbor[1] in range(len(grid[0])) and \
+                                grid[neighbor[0]][neighbor[1]] == "1" and neighbor not in visited:
+                            queue.append(neighbor)
+                            visited.add(neighbor)
+
                 num_islands += 1
     return num_islands
 

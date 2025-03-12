@@ -18,7 +18,7 @@ def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
         topological_order.append(s)
         if s in adjacency_list:
             for v in adjacency_list[s]:
-                if v not in topological_order:
+                # if v not in topological_order:
                     vertex_indegree[v] -= 1
                     if vertex_indegree[v] == 0:
                         sources.append(v)

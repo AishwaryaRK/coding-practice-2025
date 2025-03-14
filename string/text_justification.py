@@ -9,7 +9,12 @@ def fullJustify(words: List[str], maxWidth: int) -> List[str]:
     i = 0
     while i < len(words):
         word = words[i]
-        if char_cnt + 1 + len(word) <= maxWidth:
+        if not line and len(word) <= maxWidth:
+            line.append(word)
+            char_cnt += len(word)
+            word_cnt += 1
+            i += 1
+        elif char_cnt + 1 + len(word) <= maxWidth:
             if line:
                 line.append(" ")
                 char_cnt += 1
@@ -48,8 +53,9 @@ def fullJustify(words: List[str], maxWidth: int) -> List[str]:
     return result
 
 
-# print(fullJustify(words=["This", "is", "an", "example", "of", "text", "justification."], maxWidth=16))
-# print(fullJustify(words=["What", "must", "be", "acknowledgment", "shall", "be"], maxWidth=16))
+print(fullJustify(words=["This", "is", "an", "example", "of", "text", "justification."], maxWidth=16))
+print(fullJustify(words=["What", "must", "be", "acknowledgment", "shall", "be"], maxWidth=16))
 print(fullJustify(
     words=["Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.",
            "Art", "is", "everything", "else", "we", "do"], maxWidth=20))
+print(fullJustify(["Listen", "to", "many,", "speak", "to", "a", "few."], 6))
